@@ -1,8 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SubstringSearchAlgorithms
 {
-    public class Class1
-    {
+    public class BruteForceAlgorithm : ISubstingSearch
+    { 
+        public ICollection<Match> SubstingSearch(string text)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

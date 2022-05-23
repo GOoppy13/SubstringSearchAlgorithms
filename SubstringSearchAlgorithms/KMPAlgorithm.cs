@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace SubstringSearchAlgorithms
 {
-    class KMPAlgorithm
+    class KMPAlgorithm : ISubstingSearch
     {
+        public ICollection<Match> SubstingSearch(string text)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

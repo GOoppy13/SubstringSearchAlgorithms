@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace SubstringSearchAlgorithms
 {
-    class RabinKarpAlgorithm
+    class RabinKarpAlgorithm : ISubstingSearch
     {
+        public ICollection<Match> SubstingSearch(string text)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
