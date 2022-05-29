@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SubstringSearchAlgorithms
 {
-    class BoyerMooreAlgorithm : ISubstingSearch
+    public class BoyerMooreAlgorithm : ISubstingSearch
     {
         private Dictionary<char, int> _shifts;
         private Dictionary<string, int> _suffShifts;
@@ -60,22 +57,17 @@ namespace SubstringSearchAlgorithms
             _shifts = new Dictionary<char, int>();
             for (int i = Pattern.Length - 1; i >= 0; i--)
             {
-                _shifts.TryAdd(Pattern[i], Pattern.Length - i);
+                _shifts.TryAdd(Pattern[i], Pattern.Length - i - 1);
             }
         }
         private int GetShift(char c)
         {
-            try
-            {
-                return _shifts[c];
-            }
-            catch (Exception)
-            {
-                return Pattern.Length;
-            }
+            _shifts.TryGetValue(c, out int value);
+            return value != 0 ? value : Pattern.Length;
         }
         private void CalculationSuffShifts()
         {
+            _suffShifts = new Dictionary<string, int>();
             string suff = "";
             for (int i = Pattern.Length - 1; i > 0; i--)
             {
@@ -107,14 +99,8 @@ namespace SubstringSearchAlgorithms
         }
         private int GetSuffShift(string suff)
         {
-            try
-            {
-                return _suffShifts[suff];
-            }
-            catch (Exception)
-            {
-                return Pattern.Length;
-            }
+            _suffShifts.TryGetValue(suff, out int value);
+            return value != 0 ? value : Pattern.Length;
         }
     }
 }

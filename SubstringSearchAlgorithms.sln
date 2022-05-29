@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32407.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubstringSearchAlgorithms", "SubstringSearchAlgorithms\SubstringSearchAlgorithms.csproj", "{7865A0F8-622F-474A-B7FF-86471BE95C01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubstringSearchAlgorithms", "SubstringSearchAlgorithms\SubstringSearchAlgorithms.csproj", "{7865A0F8-622F-474A-B7FF-86471BE95C01}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{4009FFD3-A805-40FD-AAC4-F3947967F4C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{1B480C32-B73C-47D3-A4CA-4F27FB4E6374}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{7865A0F8-622F-474A-B7FF-86471BE95C01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7865A0F8-622F-474A-B7FF-86471BE95C01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7865A0F8-622F-474A-B7FF-86471BE95C01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4009FFD3-A805-40FD-AAC4-F3947967F4C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4009FFD3-A805-40FD-AAC4-F3947967F4C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4009FFD3-A805-40FD-AAC4-F3947967F4C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4009FFD3-A805-40FD-AAC4-F3947967F4C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B480C32-B73C-47D3-A4CA-4F27FB4E6374}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B480C32-B73C-47D3-A4CA-4F27FB4E6374}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B480C32-B73C-47D3-A4CA-4F27FB4E6374}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B480C32-B73C-47D3-A4CA-4F27FB4E6374}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

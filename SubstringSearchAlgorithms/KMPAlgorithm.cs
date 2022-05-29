@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SubstringSearchAlgorithms
 {
-    class KMPAlgorithm : ISubstingSearch
+    public class KMPAlgorithm : ISubstingSearch
     {
         private Dictionary<int, int> _prefix;
         public string Pattern { get; set; }
@@ -22,7 +18,7 @@ namespace SubstringSearchAlgorithms
             {
                 if (_prefix[Pattern.Length + i + 1] == Pattern.Length)
                 {
-                    matches.Add(new Match(Pattern, i - Pattern.Length));
+                    matches.Add(new Match(Pattern, i - Pattern.Length + 1));
                 }
             }
             return matches;
@@ -32,7 +28,7 @@ namespace SubstringSearchAlgorithms
             _prefix = new Dictionary<int, int>();
             _prefix.Add(0, 0);
             text = Pattern + "$" + text;
-            for (int i = 1; i < text.Length; i++)
+            for (int i = 1; i < text.Length; ++i)
             {
                 int k = _prefix[i - 1];
                 while (k > 0 && text[i] != text[k])
@@ -41,8 +37,9 @@ namespace SubstringSearchAlgorithms
                 }
                 if (text[k] == text[i])
                 {
-                    _prefix.Add(i, k);
+                    ++k;
                 }
+                _prefix.Add(i, k);
             }
         }
     }
