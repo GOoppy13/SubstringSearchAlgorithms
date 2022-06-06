@@ -19,15 +19,15 @@ namespace ConsoleApp1
                 new BoyerMooreAlgorithm(pattern),
             };
             string text = null;
-            using (StreamReader sr = new StreamReader(""))
+            using (StreamReader sr = new StreamReader(@"C:\Users\ZeroSector\Desktop\Папки\различные ресурсы\Анна_Каренина.txt"))
             {
                 text = sr.ReadToEnd();
             }
             Stopwatch sw = new Stopwatch();
             for (int i = 0; i < algms.Count; i++)
             {
-                sw.Start();
-                algms[i].SubstingSearch(text);
+                sw.Restart();
+                Console.WriteLine(algms[i].SubstingSearch(text).Count);
                 sw.Stop();
                 Console.WriteLine(algms[i].GetType().ToString().Split('.')[1] + ": " + sw.ElapsedMilliseconds);
             }

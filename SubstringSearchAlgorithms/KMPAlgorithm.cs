@@ -4,7 +4,6 @@ namespace SubstringSearchAlgorithms
 {
     public class KMPAlgorithm : ISubstingSearch
     {
-        private Dictionary<int, int> _prefix;
         public string Pattern { get; set; }
         public KMPAlgorithm(string pattern)
         {
@@ -13,34 +12,41 @@ namespace SubstringSearchAlgorithms
         public ICollection<Match> SubstingSearch(string text)
         {
             List<Match> matches = new List<Match>();
-            CalculatePrefix(text);
-            for (int i = 0; i < text.Length; i++)
+            List<int> _prefix = new List<int>();
+            _prefix.Add(0);
+            int k;
+            for (int i = 1; i < Pattern.Length; ++i)
             {
-                if (_prefix[Pattern.Length + i + 1] == Pattern.Length)
-                {
-                    matches.Add(new Match(Pattern, i - Pattern.Length + 1));
-                }
-            }
-            return matches;
-        }
-        private void CalculatePrefix(string text)
-        {
-            _prefix = new Dictionary<int, int>();
-            _prefix.Add(0, 0);
-            text = Pattern + "$" + text;
-            for (int i = 1; i < text.Length; ++i)
-            {
-                int k = _prefix[i - 1];
-                while (k > 0 && text[i] != text[k])
+                k = _prefix[i - 1];
+                while (k > 0 && Pattern[i] != Pattern[k])
                 {
                     k = _prefix[k - 1];
                 }
-                if (text[k] == text[i])
+                if (Pattern[k] == Pattern[i])
                 {
-                    ++k;
+                    k++;
                 }
-                _prefix.Add(i, k);
+                _prefix.Add(k);
             }
+            k = 0;
+            for (int i = 0; i < text.Length; ++i)
+            {
+                while (k > 0 && text[i] != Pattern[k])
+                {
+                    k = _prefix[k - 1];
+                }
+                if (Pattern[k] == text[i])
+                {
+                    k++;
+                }
+                if (k == Pattern.Length)
+                {
+                    matches.Add(new Match(Pattern, i - Pattern.Length + 1));
+                    k = _prefix[k];
+                }
+                _prefix.Add(k);
+            }
+            return matches;
         }
     }
 }

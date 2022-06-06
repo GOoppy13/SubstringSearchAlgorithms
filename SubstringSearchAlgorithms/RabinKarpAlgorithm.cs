@@ -1,50 +1,59 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SubstringSearchAlgorithms
 {
     public class RabinKarpAlgorithm : ISubstingSearch
     {
-        private int _hashPattern;
+        private const ulong mod = 4294967296;
+        private const int primeInt = 53;
+        private ulong _powPrimeInt;
+        private ulong _hashPattern;
         public string Pattern { get; set; }
         public RabinKarpAlgorithm(string pattern)
         {
             Pattern = pattern;
+            _powPrimeInt = (ulong)Math.Pow(primeInt, Pattern.Length - 1);
+            _hashPattern = GetHashCode(0, Pattern.Length, Pattern);
         }
         public ICollection<Match> SubstingSearch(string text)
         {
-            _hashPattern = Pattern.GetHashCode();
-            List<Match> matches = new List<Match>();
-            if (text.Length >= Pattern.Length)
+            ulong _hashText = GetHashCode(0, Pattern.Length, text);
+            List <Match> matches = new List<Match>();
+            text += " ";
+            for (int i = 0; i < text.Length - Pattern.Length; i++)
             {
-                string substr = "";
-                for (int i = 0; i < Pattern.Length - 1; i++)
+                if (_hashPattern == _hashText)
                 {
-                    substr += text[i];
-                }
-                for (int j = Pattern.Length - 1; j < text.Length; j++)
-                {
-                    substr += text[j];
-                    int hash = substr.GetHashCode();
-                    if (hash == _hashPattern)
+                    int k = 0;
+                    bool flag = false;
+                    for (int j = i; j < i + Pattern.Length; j++, k++)
                     {
-                        bool flag = true;
-                        for (int i = 0, k = j - Pattern.Length + 1; i < Pattern.Length; i++, k++)
+                        if (text[j] != Pattern[k])
                         {
-                            if (Pattern[i] != text[k])
-                            {
-                                flag = false;
-                                break;
-                            }
-                        }
-                        if (flag)
-                        {
-                            matches.Add(new Match(substr, j - Pattern.Length + 1));
+                            flag = true;
+                            break;
                         }
                     }
-                    substr = substr.Remove(0, 1);
+                    if (!flag)
+                    {
+                        matches.Add(new Match(Pattern, i));
+                    }
                 }
+                _hashText -= text[i];
+                _hashText /= primeInt;
+                _hashText += _powPrimeInt * text[i + Pattern.Length];
             }
             return matches;
+        }
+        private ulong GetHashCode(int start, int end, string str)
+        {
+            ulong result = 0;
+            for (int i = start, j = 0; i < end; i++, j++)
+            {
+                result += (ulong)Math.Pow(primeInt, j) * str[i];
+            }
+            return result;
         }
     }
 }
